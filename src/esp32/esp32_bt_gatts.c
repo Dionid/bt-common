@@ -388,7 +388,7 @@ static void esp32_bt_gatts_ev_mgos(void *arg) {
       }
       uint16_t svch = se->attr_info[0].handle;
       LOG(LL_INFO,
-          ("Starting BT service %s", esp32_bt_uuid_to_str(&p->svc_uuid, buf)));
+          ("Starting ! BT service %s", esp32_bt_uuid_to_str(&p->svc_uuid, buf)));
       esp_ble_gatts_start_service(svch);
       free(ei->ep.add_attr_tab.handles);
       break;
@@ -1068,10 +1068,10 @@ bool mgos_bt_gatts_register_service(const char *svc_uuid,
       if (cd->prop & MGOS_BT_GATT_PROP_INDICATE) {
         cp |= ESP_GATT_CHAR_PROP_BIT_INDICATE;
       }
-      LOG(LL_ERROR, ("Before Setting MGOS_BT_GATT_PROP_WRITE_NR"));
+      LOG(LL_INFO, ("Before Setting MGOS_BT_GATT_PROP_WRITE_NR!"));
       if (cd->prop & MGOS_BT_GATT_PROP_WRITE_NR) {
 				cp |= ESP_GATT_CHAR_PROP_BIT_WRITE_NR;
-				LOG(LL_ERROR, ("Setting MGOS_BT_GATT_PROP_WRITE_NR"));
+				LOG(LL_INFO, ("Setting MGOS_BT_GATT_PROP_WRITE_NR"));
 			}
       ai->char_prop = cp;
       dbe->att_desc.value = &ai->char_prop;
