@@ -1068,8 +1068,10 @@ bool mgos_bt_gatts_register_service(const char *svc_uuid,
       if (cd->prop & MGOS_BT_GATT_PROP_INDICATE) {
         cp |= ESP_GATT_CHAR_PROP_BIT_INDICATE;
       }
+      LOG(LL_ERROR, ("Before Setting MGOS_BT_GATT_PROP_WRITE_NR"));
       if (cd->prop & MGOS_BT_GATT_PROP_WRITE_NR) {
 				cp |= ESP_GATT_CHAR_PROP_BIT_WRITE_NR;
+				LOG(LL_ERROR, ("Setting MGOS_BT_GATT_PROP_WRITE_NR"));
 			}
       ai->char_prop = cp;
       dbe->att_desc.value = &ai->char_prop;
