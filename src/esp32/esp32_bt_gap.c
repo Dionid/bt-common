@@ -43,6 +43,11 @@ static bool s_pairing_enable = false;
 static bool s_scanning = false;
 static int s_scan_duration_sec = 3;
 
+//static uint8_t p_service_uuid[16] = "7772e5db-3868-4112-a1a9-f2669d106bf3";
+static uint8_t p_service_uuid[16] = {0x77,0x72,0xe5,0xdb,0x38,0x68,0x41,0x12,0xa1,0xa9,0xf2,0x66,0x9d,0x10,0x6b,0xf3};
+
+//static char cdata[2] = [17, ESP_BLE_AD_TYPE_128SRV_CMPL];
+
 static esp_ble_adv_data_t s_adv_data = {
     .set_scan_rsp = false,
     .include_name = true,
@@ -54,8 +59,8 @@ static esp_ble_adv_data_t s_adv_data = {
     .p_manufacturer_data = NULL,
     .service_data_len = 0,
     .p_service_data = NULL,
-    .service_uuid_len = 0,
-    .p_service_uuid = NULL,
+    .service_uuid_len = ESP_UUID_LEN_128,
+    .p_service_uuid = p_service_uuid,
     .flag = (ESP_BLE_ADV_FLAG_GEN_DISC | ESP_BLE_ADV_FLAG_BREDR_NOT_SPT),
 };
 

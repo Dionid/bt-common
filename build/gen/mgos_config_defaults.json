@@ -1,0 +1,37 @@
+{
+ "debug": {
+  "level": 2,
+  "factory_reset_gpio": -1,
+  "mbedtls_level": 1
+ },
+ "device": {
+  "id": "esp32_??????"
+ },
+ "sys": {
+  "wdt_timeout": 30,
+  "atca": {
+   "i2c_addr": 96,
+   "ecdh_slots_mask": 12
+  }
+ },
+ "conf_acl": "*",
+ "i2c": {
+  "freq": 100000,
+  "sda_gpio": 32,
+  "scl_gpio": 33
+ },
+ "i2c1": {
+  "unit_no": 1,
+  "freq": 100000,
+  "sda_gpio": 32,
+  "scl_gpio": 33
+ },
+ "bt": {
+  "enable": true,
+  "adv_enable": true,
+  "allow_pairing": true,
+  "max_paired_devices": -1,
+  "random_address": true,
+  "gatt_mtu": 500
+ }
+}

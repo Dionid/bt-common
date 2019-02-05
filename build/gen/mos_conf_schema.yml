@@ -1,0 +1,106 @@
+- - i2c
+  - o
+  - title: I2C settings
+- - i2c.unit_no
+  - i
+  - 0
+  - title: Which hardware unit to use, 0 or 1
+- - i2c.enable
+  - b
+  - false
+  - title: Enable I2C
+- - i2c.freq
+  - i
+  - 100000
+  - title: Clock frequency
+- - i2c.debug
+  - b
+  - false
+  - title: Debug I2C bus activity
+- - i2c.sda_gpio
+  - i
+  - 32
+  - title: GPIO to use for SDA
+- - i2c.scl_gpio
+  - i
+  - 33
+  - title: GPIO to use for SCL
+- - i2c1
+  - i2c
+  - title: I2C settings
+- - i2c1.unit_no
+  - 1
+- - sys.atca
+  - o
+  - title: CryptoAuthLib configuration
+- - sys.atca.enable
+  - b
+  - false
+  - title: Enable the chip
+- - sys.atca.i2c_bus
+  - i
+  - 0
+  - title: Which I2C bus to use
+- - sys.atca.i2c_addr
+  - i
+  - 96
+  - title: I2C address of the chip
+- - sys.atca.ecdh_slots_mask
+  - i
+  - 12
+  - title: Which slots can be used for ECDH (bitmask)
+- - debug.mbedtls_level
+  - i
+  - 1
+  - title: mbedTLS debug level
+- - bt
+  - o
+  - title: Bluetooth settings
+- - bt.enable
+  - b
+  - true
+  - title: Enable BT
+- - bt.dev_name
+  - s
+  - ""
+  - title: Device name; defaults to device.id
+- - bt.adv_enable
+  - b
+  - true
+  - title: Advertise services
+- - bt.scan_rsp_data_hex
+  - s
+  - ""
+  - title: Scan response data, hex-encoded
+- - bt.keep_enabled
+  - b
+  - false
+  - title: By default, BT will be disabled once WiFi is configured and connects. Set
+      this to true to keep BT enabled.
+- - bt.allow_pairing
+  - b
+  - true
+  - title: Allow pairing/bonding with other devices
+- - bt.max_paired_devices
+  - i
+  - -1
+  - title: Max number of paired devices; -1 - no limit
+- - bt.random_address
+  - b
+  - true
+  - title: Use random BT address
+- - bt.gatt_mtu
+  - i
+  - 500
+  - title: Local MTU setting, used when negotiating with clients
+- - bt.gatts
+  - o
+  - title: GATTS settings
+- - bt.gatts.min_sec_level
+  - i
+  - 0
+  - title: 0 - no auth required, 1 - encryption reqd, 2 - encryption + MITM reqd
+- - bt.gatts.require_pairing
+  - b
+  - false
+  - title: Require device to be paired before accessing services

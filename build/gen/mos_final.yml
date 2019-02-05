@@ -1,0 +1,276 @@
+name: bt-common
+type: lib
+version: "1.1"
+platform: esp32
+platforms:
+- esp32
+author: mongoose-os
+description: Bluetooth support
+sources:
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/src/mgos_bt.c
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/src/mgos_bt_gap.c
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/src/mgos_bt_js.c
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/src/esp32/esp32_bt.c
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/src/esp32/esp32_bt_gap.c
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/src/esp32/esp32_bt_gattc.c
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/src/esp32/esp32_bt_gatts.c
+includes:
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/i2c/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca/cryptoauthlib/lib
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mbedtls/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mbedtls/include/esp32
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mbedtls/mbedtls/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-common/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-common/include/esp32
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mongoose/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-lfs/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-spiffs/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-spiffs/include/spiffs
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-spiffs/include/esp32
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/core/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/core/include/esp32
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/include
+- /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/include/esp32
+config_schema:
+- - i2c
+  - o
+  - title: I2C settings
+- - i2c.unit_no
+  - i
+  - 0
+  - title: Which hardware unit to use, 0 or 1
+- - i2c.enable
+  - b
+  - false
+  - title: Enable I2C
+- - i2c.freq
+  - i
+  - 100000
+  - title: Clock frequency
+- - i2c.debug
+  - b
+  - false
+  - title: Debug I2C bus activity
+- - i2c.sda_gpio
+  - i
+  - 32
+  - title: GPIO to use for SDA
+- - i2c.scl_gpio
+  - i
+  - 33
+  - title: GPIO to use for SCL
+- - i2c1
+  - i2c
+  - title: I2C settings
+- - i2c1.unit_no
+  - 1
+- - sys.atca
+  - o
+  - title: CryptoAuthLib configuration
+- - sys.atca.enable
+  - b
+  - false
+  - title: Enable the chip
+- - sys.atca.i2c_bus
+  - i
+  - 0
+  - title: Which I2C bus to use
+- - sys.atca.i2c_addr
+  - i
+  - 96
+  - title: I2C address of the chip
+- - sys.atca.ecdh_slots_mask
+  - i
+  - 12
+  - title: Which slots can be used for ECDH (bitmask)
+- - debug.mbedtls_level
+  - i
+  - 1
+  - title: mbedTLS debug level
+- - bt
+  - o
+  - title: Bluetooth settings
+- - bt.enable
+  - b
+  - true
+  - title: Enable BT
+- - bt.dev_name
+  - s
+  - ""
+  - title: Device name; defaults to device.id
+- - bt.adv_enable
+  - b
+  - true
+  - title: Advertise services
+- - bt.scan_rsp_data_hex
+  - s
+  - ""
+  - title: Scan response data, hex-encoded
+- - bt.keep_enabled
+  - b
+  - false
+  - title: By default, BT will be disabled once WiFi is configured and connects. Set
+      this to true to keep BT enabled.
+- - bt.allow_pairing
+  - b
+  - true
+  - title: Allow pairing/bonding with other devices
+- - bt.max_paired_devices
+  - i
+  - -1
+  - title: Max number of paired devices; -1 - no limit
+- - bt.random_address
+  - b
+  - true
+  - title: Use random BT address
+- - bt.gatt_mtu
+  - i
+  - 500
+  - title: Local MTU setting, used when negotiating with clients
+- - bt.gatts
+  - o
+  - title: GATTS settings
+- - bt.gatts.min_sec_level
+  - i
+  - 0
+  - title: 0 - no auth required, 1 - encryption reqd, 2 - encryption + MITM reqd
+- - bt.gatts.require_pairing
+  - b
+  - false
+  - title: Require device to be paired before accessing services
+build_vars:
+  BOARD: ""
+  ESP_IDF_EXTRA_COMPONENTS: ' bt'
+  ESP_IDF_SDKCONFIG_OPTS: |2
+     CONFIG_SUPPORT_STATIC_ALLOCATION=y
+     CONFIG_BT_ENABLED=y CONFIG_BLUEDROID_ENABLED=y CONFIG_BTC_TASK_STACK_SIZE=6144 CONFIG_BLUEDROID_MEM_DEBUG= CONFIG_CLASSIC_BT_ENABLED= CONFIG_BT_DRAM_RELEASE=y CONFIG_GATTS_ENABLE=y CONFIG_GATTC_ENABLE=y CONFIG_BLE_SMP_ENABLE=y CONFIG_BT_STACK_NO_LOG= CONFIG_BT_ACL_CONNECTIONS=4 CONFIG_BTDM_CONTROLLER_RUN_CPU=0 CONFIG_SMP_ENABLE=y CONFIG_BT_RESERVE_DRAM=0x10000
+  MGOS_HAVE_ATCA: "1"
+  MGOS_HAVE_CORE: "1"
+  MGOS_HAVE_I2C: "1"
+  MGOS_HAVE_MBEDTLS: "1"
+  MGOS_HAVE_MONGOOSE: "1"
+  MGOS_HAVE_VFS_COMMON: "1"
+  MGOS_HAVE_VFS_FS_LFS: "1"
+  MGOS_HAVE_VFS_FS_SPIFFS: "1"
+cdefs:
+  LFS_NO_DEBUG: "1"
+  MBEDTLS_ECP_ATCA: "1"
+  MBEDTLS_USER_CONFIG_FILE: \"mbedtls_platform_config.h\"
+  MBEDTLS_X509_CA_CHAIN_ON_DISK: "1"
+  MG_ENABLE_DNS: "1"
+  MG_ENABLE_DNS_SERVER: "1"
+  MG_ENABLE_MQTT: "1"
+  MG_ENABLE_SNTP: "1"
+  MG_ENABLE_SSL: "1"
+  MG_SSL_IF: MG_SSL_IF_MBEDTLS
+  MG_SSL_IF_MBEDTLS_FREE_CERTS: "1"
+  MGOS_HAVE_ATCA: "1"
+  MGOS_HAVE_CORE: "1"
+  MGOS_HAVE_I2C: "1"
+  MGOS_HAVE_MBEDTLS: "1"
+  MGOS_HAVE_MONGOOSE: "1"
+  MGOS_HAVE_VFS_COMMON: "1"
+  MGOS_HAVE_VFS_FS_LFS: "1"
+  MGOS_HAVE_VFS_FS_SPIFFS: "1"
+tags:
+- bt
+- bluetooth
+- c
+- net
+- docs:net:BLE
+libs_version: 2.11.0
+modules_version: 2.11.0
+mongoose_os_version: 2.11.0
+manifest_version: "2017-09-29"
+libs_handled:
+- lib:
+    origin: https://github.com/mongoose-os-libs/i2c
+    location: https://github.com/mongoose-os-libs/i2c
+    name: i2c
+  path: /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/i2c
+  init_deps:
+  - core
+  sources:
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/i2c/src
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/i2c/src/esp32
+- lib:
+    origin: https://github.com/mongoose-os-libs/atca
+    location: https://github.com/mongoose-os-libs/atca
+    name: atca
+  path: /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca
+  init_deps:
+  - i2c
+  sources:
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca/src
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca/cryptoauthlib/lib
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca/cryptoauthlib/lib/basic
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca/cryptoauthlib/lib/crypto
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca/cryptoauthlib/lib/hal
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/atca/cryptoauthlib/lib/host
+- lib:
+    origin: https://github.com/mongoose-os-libs/mbedtls
+    location: https://github.com/mongoose-os-libs/mbedtls
+    name: mbedtls
+  path: /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mbedtls
+  sources:
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mbedtls/src
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mbedtls/src/esp32
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mbedtls/mbedtls/library
+- lib:
+    origin: https://github.com/mongoose-os-libs/vfs-common
+    location: https://github.com/mongoose-os-libs/vfs-common
+    name: vfs-common
+  path: /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-common
+  sources:
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-common/src
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-common/src/esp32
+- lib:
+    origin: https://github.com/mongoose-os-libs/mongoose
+    location: https://github.com/mongoose-os-libs/mongoose
+    name: mongoose
+  path: /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mongoose
+  sources:
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/mongoose/src
+- lib:
+    origin: https://github.com/mongoose-os-libs/vfs-fs-lfs
+    location: https://github.com/mongoose-os-libs/vfs-fs-lfs
+    name: vfs-fs-lfs
+  path: /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-lfs
+  init_deps:
+  - vfs-common
+  sources:
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-lfs/src
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-lfs/src/littlefs
+- lib:
+    origin: https://github.com/mongoose-os-libs/vfs-fs-spiffs
+    location: https://github.com/mongoose-os-libs/vfs-fs-spiffs
+    name: vfs-fs-spiffs
+  path: /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-spiffs
+  init_deps:
+  - vfs-common
+  sources:
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-spiffs/src
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/vfs-fs-spiffs/src/spiffs
+- lib:
+    origin: https://github.com/mongoose-os-libs/core
+    location: https://github.com/mongoose-os-libs/core
+    name: core
+  path: /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/core
+  init_deps:
+  - mongoose
+  - vfs-common
+  - vfs-fs-lfs
+  - vfs-fs-spiffs
+  sources:
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/core/src
+  - /fwbuild-volumes/2.11.0/apps/bt-common/esp32/build_contexts/build_ctx_410092115/deps/core/src/esp32
+init_deps:
+- mongoose
+- vfs-common
+- vfs-fs-lfs
+- vfs-fs-spiffs
+- core
+- i2c
+- atca
+- mbedtls
